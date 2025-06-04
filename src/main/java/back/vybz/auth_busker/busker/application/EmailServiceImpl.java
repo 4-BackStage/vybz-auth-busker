@@ -77,9 +77,9 @@ public class EmailServiceImpl implements EmailService {
             throw new BaseException(BaseResponseStatus.INVALID_EMAIL_CODE);
         }
 
-        if (requestVerificationEmailDto.getPurpose() == SendPurpose.FIND_PASSWORD) {
+        if (requestVerificationEmailDto.getSendPurpose() == SendPurpose.FIND_PASSWORD) {
             redisUtil.save("find-password-Verified:" + email, "true", 10, TimeUnit.MINUTES);
-        } else if (requestVerificationEmailDto.getPurpose() == SendPurpose.SIGN_UP) {
+        } else if (requestVerificationEmailDto.getSendPurpose() == SendPurpose.SIGN_UP) {
             redisUtil.save("sign-up-Verified:" + email, "true", 20, TimeUnit.MINUTES);
         } else {
             redisUtil.save("find-email-Verified:" + email, "true", 10, TimeUnit.MINUTES);
