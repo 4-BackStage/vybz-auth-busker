@@ -11,8 +11,6 @@ public interface AuthService {
 
     void signUp(RequestSignUpDto requestSignUpDto);
 
-    boolean existsEmail(String email);
-
     ResponseBuskerSignInDto signIn(RequestAuthSignInDto requestAuthSignInDto);
 
     void signOut(String refreshToken);

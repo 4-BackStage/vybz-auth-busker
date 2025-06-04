@@ -35,16 +35,6 @@ public class AuthController {
         return new BaseResponseEntity<>(BaseResponseStatus.SIGN_UP_SUCCESS);
     }
 
-    @Operation(summary = "Busker Check Email API", description = "이메일 중복 확인", tags = {"Auth-service"})
-    @PostMapping("/check/email")
-    public BaseResponseEntity<Boolean> emailExists(
-            @Valid @RequestBody RequestExistsEmailVo requestExistsEmailVo
-    ) {
-        return new BaseResponseEntity<>(
-                authService.existsEmail(RequestExistsEmailDto.from(requestExistsEmailVo).getEmail())
-        );
-    }
-
     @Operation(summary = "Busker SignIn API", description = "버스커 로그인", tags = {"Auth-service"})
     @PostMapping("/sign-in")
     public BaseResponseEntity<ResponseBuskerSignInVo> signIn(

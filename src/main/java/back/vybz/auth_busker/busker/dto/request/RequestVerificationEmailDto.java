@@ -14,20 +14,20 @@ public class RequestVerificationEmailDto {
 
     private String verificationCode;
 
-    private SendPurpose purpose;
+    private SendPurpose sendPurpose;
 
     @Builder
-    public RequestVerificationEmailDto(String email, String verificationCode, SendPurpose purpose) {
+    public RequestVerificationEmailDto(String email, String verificationCode, SendPurpose sendPurpose) {
         this.email = email;
         this.verificationCode = verificationCode;
-        this.purpose = purpose;
+        this.sendPurpose = sendPurpose;
     }
 
     public static RequestVerificationEmailDto from(RequestVerificationEmailVo requestVerificationEmailVo) {
         return RequestVerificationEmailDto.builder()
                 .email(requestVerificationEmailVo.getEmail())
                 .verificationCode(requestVerificationEmailVo.getVerificationCode())
-                .purpose(SendPurpose.valueOf(requestVerificationEmailVo.getPurpose().toUpperCase()))
+                .sendPurpose(SendPurpose.valueOf(requestVerificationEmailVo.getPurpose().toUpperCase()))
                 .build();
     }
 }

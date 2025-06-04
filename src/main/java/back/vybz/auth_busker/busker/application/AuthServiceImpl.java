@@ -74,11 +74,6 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public boolean existsEmail(String email) {
-        return authRepository.existsByEmail(email);
-    }
-
-    @Override
     public ResponseBuskerSignInDto signIn(RequestAuthSignInDto requestAuthSignInDto) {
 
         Busker busker = authRepository.findByEmail(requestAuthSignInDto.getEmail())
