@@ -1,4 +1,4 @@
-package back.vybz.auth_busker.busker.common.config;
+package back.vybz.auth_busker.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

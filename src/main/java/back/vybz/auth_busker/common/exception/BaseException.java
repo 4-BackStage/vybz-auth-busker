@@ -1,7 +1,7 @@
-package back.vybz.auth_busker.busker.common.exception;
+package back.vybz.auth_busker.common.exception;
 
 
-import back.vybz.auth_busker.busker.common.entity.BaseResponseStatus;
+import back.vybz.auth_busker.common.entity.BaseResponseStatus;
 import lombok.Getter;
 
 @Getter

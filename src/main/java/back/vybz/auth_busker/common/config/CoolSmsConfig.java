@@ -1,4 +1,4 @@
-package back.vybz.auth_busker.busker.common.config;
+package back.vybz.auth_busker.common.config;
 
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.service.DefaultMessageService;

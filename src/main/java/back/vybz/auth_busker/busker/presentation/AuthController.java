@@ -2,15 +2,13 @@ package back.vybz.auth_busker.busker.presentation;
 
 import back.vybz.auth_busker.busker.application.AuthService;
 import back.vybz.auth_busker.busker.dto.request.RequestAuthSignInDto;
-import back.vybz.auth_busker.busker.dto.request.RequestExistsEmailDto;
 import back.vybz.auth_busker.busker.dto.request.RequestSignUpDto;
 import back.vybz.auth_busker.busker.vo.request.RequestAuthSignInVo;
-import back.vybz.auth_busker.busker.vo.request.RequestExistsEmailVo;
 import back.vybz.auth_busker.busker.vo.request.RequestSignUpVo;
-import back.vybz.auth_busker.busker.common.application.ReissueService;
+import back.vybz.auth_busker.common.application.ReissueService;
 import back.vybz.auth_busker.busker.dto.response.ResponseBuskerSignInDto;
-import back.vybz.auth_busker.busker.common.entity.BaseResponseEntity;
-import back.vybz.auth_busker.busker.common.entity.BaseResponseStatus;
+import back.vybz.auth_busker.common.entity.BaseResponseEntity;
+import back.vybz.auth_busker.common.entity.BaseResponseStatus;
 import back.vybz.auth_busker.busker.vo.response.ResponseBuskerSignInVo;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;

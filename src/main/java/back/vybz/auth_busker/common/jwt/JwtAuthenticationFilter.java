@@ -1,9 +1,9 @@
-package back.vybz.auth_busker.busker.common.jwt;
+package back.vybz.auth_busker.common.jwt;
 
 import back.vybz.auth_busker.busker.application.AuthService;
-import back.vybz.auth_busker.busker.common.entity.BaseResponseStatus;
-import back.vybz.auth_busker.busker.common.exception.BaseException;
-import back.vybz.auth_busker.busker.common.util.RedisUtil;
+import back.vybz.auth_busker.common.entity.BaseResponseStatus;
+import back.vybz.auth_busker.common.exception.BaseException;
+import back.vybz.auth_busker.common.util.RedisUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

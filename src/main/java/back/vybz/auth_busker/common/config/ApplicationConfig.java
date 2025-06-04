@@ -1,7 +1,7 @@
-package back.vybz.auth_busker.busker.common.config;
+package back.vybz.auth_busker.common.config;
 
-import back.vybz.auth_busker.busker.common.entity.BaseResponseStatus;
-import back.vybz.auth_busker.busker.common.exception.BaseException;
+import back.vybz.auth_busker.common.entity.BaseResponseStatus;
+import back.vybz.auth_busker.common.exception.BaseException;
 import back.vybz.auth_busker.busker.domain.CustomBuskerDetails;
 import back.vybz.auth_busker.busker.infrastructure.AuthRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
-package back.vybz.auth_busker.busker.common.application;
+package back.vybz.auth_busker.common.application;
 
-import back.vybz.auth_busker.busker.common.entity.BaseResponseStatus;
-import back.vybz.auth_busker.busker.common.exception.BaseException;
-import back.vybz.auth_busker.busker.common.jwt.JwtProvider;
-import back.vybz.auth_busker.busker.common.util.RedisUtil;
+import back.vybz.auth_busker.common.entity.BaseResponseStatus;
+import back.vybz.auth_busker.common.exception.BaseException;
+import back.vybz.auth_busker.common.jwt.JwtProvider;
+import back.vybz.auth_busker.common.util.RedisUtil;
 import back.vybz.auth_busker.busker.dto.response.ResponseBuskerSignInDto;
 import back.vybz.auth_busker.busker.infrastructure.AuthRepository;
 import lombok.RequiredArgsConstructor;

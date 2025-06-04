@@ -1,4 +1,4 @@
-package back.vybz.auth_busker.busker.common.entity;
+package back.vybz.auth_busker.common.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;

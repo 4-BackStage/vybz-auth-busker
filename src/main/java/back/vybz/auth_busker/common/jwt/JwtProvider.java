@@ -1,14 +1,12 @@
-package back.vybz.auth_busker.busker.common.jwt;
+package back.vybz.auth_busker.common.jwt;
 
-import back.vybz.auth_busker.busker.common.entity.BaseResponseStatus;
-import back.vybz.auth_busker.busker.common.exception.BaseException;
+import back.vybz.auth_busker.common.entity.BaseResponseStatus;
+import back.vybz.auth_busker.common.exception.BaseException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;

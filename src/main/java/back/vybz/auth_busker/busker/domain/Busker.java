@@ -1,6 +1,6 @@
 package back.vybz.auth_busker.busker.domain;
 
-import back.vybz.auth_busker.busker.common.entity.SoftDeletableEntity;
+import back.vybz.auth_busker.common.entity.SoftDeletableEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package back.vybz.auth_busker.busker.common.entity;
+package back.vybz.auth_busker.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

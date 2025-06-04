@@ -1,7 +1,7 @@
 package back.vybz.auth_busker.busker.infrastructure.email;
 
-import back.vybz.auth_busker.busker.common.entity.BaseResponseStatus;
-import back.vybz.auth_busker.busker.common.exception.BaseException;
+import back.vybz.auth_busker.common.entity.BaseResponseStatus;
+import back.vybz.auth_busker.common.exception.BaseException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;

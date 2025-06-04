@@ -1,4 +1,4 @@
-package back.vybz.auth_busker.busker.common.config;
+package back.vybz.auth_busker.common.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;

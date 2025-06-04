@@ -1,6 +1,6 @@
 package back.vybz.auth_busker.busker.vo.request;
 
-import back.vybz.auth_busker.busker.common.pattern.RegexPatterns;
+import back.vybz.auth_busker.common.pattern.RegexPatterns;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package back.vybz.auth_busker.busker.common.config;
+package back.vybz.auth_busker.common.config;
 
-import back.vybz.auth_busker.busker.common.jwt.JwtAuthenticationFilter;
+import back.vybz.auth_busker.common.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

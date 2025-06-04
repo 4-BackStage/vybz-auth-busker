@@ -1,7 +1,7 @@
-package back.vybz.auth_busker.busker.common.application;
+package back.vybz.auth_busker.common.application;
 
-import back.vybz.auth_busker.busker.common.jwt.JwtProvider;
-import back.vybz.auth_busker.busker.common.util.RedisUtil;
+import back.vybz.auth_busker.common.jwt.JwtProvider;
+import back.vybz.auth_busker.common.util.RedisUtil;
 import back.vybz.auth_busker.busker.domain.Busker;
 import back.vybz.auth_busker.busker.dto.response.ResponseBuskerSignInDto;
 import lombok.RequiredArgsConstructor;

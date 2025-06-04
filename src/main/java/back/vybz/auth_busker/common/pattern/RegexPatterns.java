@@ -1,4 +1,4 @@
-package back.vybz.auth_busker.busker.common.pattern;
+package back.vybz.auth_busker.common.pattern;
 
 public class RegexPatterns {
     public static final String PASSWORD =

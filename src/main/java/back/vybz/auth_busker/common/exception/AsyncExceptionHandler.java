@@ -1,4 +1,4 @@
-package back.vybz.auth_busker.busker.common.exception;
+package back.vybz.auth_busker.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
