@@ -28,15 +28,22 @@ public class RequestSignUpDto {
 
     private List<RequestAgreementConsentDto> agreements;
 
+    private String profileImageUrl;
+
+    private String introduction;
+
     @Builder
     public RequestSignUpDto(String email, String password, List<String> categoryId, String phoneNumber,
-                            String nickname, List<RequestAgreementConsentDto> agreements) {
+                            String nickname, List<RequestAgreementConsentDto> agreements,
+                            String profileImageUrl, String introduction) {
         this.email = email;
         this.password = password;
         this.categoryId = categoryId;
         this.phoneNumber = phoneNumber;
         this.nickname = nickname;
         this.agreements = agreements;
+        this.profileImageUrl = profileImageUrl;
+        this.introduction = introduction;
     }
 
     public Busker toEntity(PasswordEncoder passwordEncoder) {
@@ -57,6 +64,8 @@ public class RequestSignUpDto {
                 .nickname(requestSignUpVo.getNickname())
                 .categoryId(requestSignUpVo.getCategoryId())
                 .agreements(mapAgreements(requestSignUpVo.getAgreements()))
+                .profileImageUrl(requestSignUpVo.getProfileImageUrl())
+                .introduction(requestSignUpVo.getIntroduction())
                 .build();
     }
 

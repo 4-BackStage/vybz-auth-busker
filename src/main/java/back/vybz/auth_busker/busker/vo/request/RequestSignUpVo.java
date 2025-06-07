@@ -45,4 +45,8 @@ public class RequestSignUpVo {
     private String nickname;
 
     private List<RequestAgreementConsentVo> agreements;
+
+    private String profileImageUrl;
+
+    private String introduction;
 }

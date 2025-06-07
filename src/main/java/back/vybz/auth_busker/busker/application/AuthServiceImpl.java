@@ -75,6 +75,8 @@ public class AuthServiceImpl implements AuthService {
                 .nickname(requestSignUpDto.getNickname())
                 .categoryId(requestSignUpDto.getCategoryId())
                 .agreements(requestSignUpDto.getAgreements())
+                .profileImageUrl(requestSignUpDto.getProfileImageUrl())
+                .introduction(requestSignUpDto.getIntroduction())
                 .build());
     }
 
