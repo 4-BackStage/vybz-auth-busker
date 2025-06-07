@@ -20,7 +20,7 @@ public class RequestSignUpDto {
 
     private String password;
 
-    private List<String> categoryId;
+    private List<Long> categoryId;
 
     private String phoneNumber;
 
@@ -33,7 +33,7 @@ public class RequestSignUpDto {
     private String introduction;
 
     @Builder
-    public RequestSignUpDto(String email, String password, List<String> categoryId, String phoneNumber,
+    public RequestSignUpDto(String email, String password, List<Long> categoryId, String phoneNumber,
                             String nickname, List<RequestAgreementConsentDto> agreements,
                             String profileImageUrl, String introduction) {
         this.email = email;
