@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -18,15 +19,14 @@ public class RequestSignUpDto {
 
     private String password;
 
-    private String categoryId;
+    private List<String> categoryId;
 
     private String phoneNumber;
 
     private String nickname;
 
     @Builder
-    public RequestSignUpDto(String email, String password,
-                            String categoryId, String phoneNumber, String nickname) {
+    public RequestSignUpDto(String email, String password, List<String> categoryId, String phoneNumber, String nickname) {
         this.email = email;
         this.password = password;
         this.categoryId = categoryId;
