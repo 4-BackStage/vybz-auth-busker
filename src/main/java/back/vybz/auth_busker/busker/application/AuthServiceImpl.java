@@ -1,5 +1,7 @@
 package back.vybz.auth_busker.busker.application;
 
+import back.vybz.auth_busker.busker.dto.SendPurpose;
+import back.vybz.auth_busker.busker.util.VerificationValidator;
 import back.vybz.auth_busker.common.application.TokenService;
 import back.vybz.auth_busker.common.entity.BaseResponseStatus;
 import back.vybz.auth_busker.common.exception.BaseException;
@@ -35,6 +37,8 @@ public class AuthServiceImpl implements AuthService {
 
     private final JwtProvider jwtProvider;
 
+    private final VerificationValidator verificationValidator;
+
     private final BuskerKafkaProducer buskerKafkaProducer;
 
     @Override
@@ -59,22 +63,12 @@ public class AuthServiceImpl implements AuthService {
             throw new BaseException(BaseResponseStatus.DUPLICATED_SMS);
         }
 
-        String emailVerifyKey = "sign-up-Verified:" + email;
-
-        String smsVerifyKey = "sign-up-sms-Verified:" + phone;
-
-        if (!"true".equals(redisUtil.get(emailVerifyKey))) {
-            throw new BaseException(BaseResponseStatus.SIGN_UP_NOT_VERIFIED);
-        }
-
-        if (!"true".equals(redisUtil.get(smsVerifyKey))) {
-            throw new BaseException(BaseResponseStatus.SIGN_UP_NOT_SMS_VERIFIED);
-        }
+        verificationValidator.validate(SendPurpose.SIGN_UP, email, phone);
 
         Busker savedBusker = authRepository.save(requestSignUpDto.toEntity(passwordEncoder));
 
-        redisUtil.delete(emailVerifyKey);
-        redisUtil.delete(smsVerifyKey);
+        redisUtil.delete("sign-up-Verified:" + email);
+        redisUtil.delete("sign-up-sms-Verified:" + phone);
 
         buskerKafkaProducer.sendBuskerAuthEvent(BuskerAuthEvent.builder()
                 .buskerUuid(savedBusker.getBuskerUuid())

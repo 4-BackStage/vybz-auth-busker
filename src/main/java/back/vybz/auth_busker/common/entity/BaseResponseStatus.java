@@ -83,6 +83,12 @@ public enum BaseResponseStatus {
     SMS_CODE_VERIFICATION_LIMITED(HttpStatus.TOO_MANY_REQUESTS, false, 2119, "반복적인 인증에 실패했습니다. 다시 코드 전송을 요청해주세요."),
 
 
+    VERIFICATION_REQUIRED(HttpStatus.BAD_REQUEST, false, 2203, "이메일 또는 SMS 인증이 필요합니다."),
+    SMS_VERIFICATION_REQUIRED(HttpStatus.BAD_REQUEST, false, 2204, "전화번호 인증이 필요합니다."),
+    INVALID_EMAIL_REQUEST(HttpStatus.BAD_REQUEST, false, 2210, "잘못된 이메일 인증 요청입니다."),
+    INVALID_SMS_REQUEST(HttpStatus.BAD_REQUEST, false, 2211, "잘못된 SMS 인증 요청입니다."),
+
+
     /**
      * Request 유효성 에러
      */

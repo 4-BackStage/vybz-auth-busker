@@ -1,5 +1,6 @@
 package back.vybz.auth_busker.busker.application;
 
+import back.vybz.auth_busker.busker.util.VerificationKeyManager;
 import back.vybz.auth_busker.common.entity.BaseResponseStatus;
 import back.vybz.auth_busker.common.exception.BaseException;
 import back.vybz.auth_busker.common.util.RedisUtil;
@@ -37,6 +38,8 @@ public class SmsServiceImpl implements SmsService {
         smsCertificationUtil.sendSMS(phoneNumber, textMessage);
 
         redisUtil.save("sms:" + requestSmsDto.getPhoneNumber(), certificationCode, 15, TimeUnit.MINUTES);
+        redisUtil.save(VerificationKeyManager.failSmsKey(phoneNumber), "0", 5L, TimeUnit.MINUTES);
+
     }
 
     @Override
@@ -50,7 +53,7 @@ public class SmsServiceImpl implements SmsService {
         }
 
         if (!redisCode.equals(requestVerificationSmsDto.getVerificationSmsCode())) {
-            String smsFailKey = "SMSVerify:" + number;
+            String smsFailKey = VerificationKeyManager.failSmsKey(number);
 
             if (redisUtil.increase(smsFailKey, 5L, TimeUnit.MINUTES) >= 10) {
                 redisUtil.delete("sms:" + number);
@@ -60,23 +63,9 @@ public class SmsServiceImpl implements SmsService {
             throw new BaseException(BaseResponseStatus.INVALID_SMS_CODE);
         }
 
-        SendPurpose purpose = requestVerificationSmsDto.getSendPurpose();
-
-        switch (purpose) {
-            case FIND_EMAIL:
-                redisUtil.save("find-email-sms-Verified:" + number, "true", 10, TimeUnit.MINUTES);
-                break;
-            case FIND_PASSWORD:
-                redisUtil.save("find-password-sms-Verified:" + number, "true", 10, TimeUnit.MINUTES);
-                break;
-            case SIGN_UP:
-            default:
-                redisUtil.save("sign-up-sms-Verified:" + number, "true", 10, TimeUnit.MINUTES);
-                break;
-        }
-
+        redisUtil.save(VerificationKeyManager.smsKey(requestVerificationSmsDto.getSendPurpose(), number), "true", 10, TimeUnit.MINUTES);
         redisUtil.delete("sms:" + number);
-        redisUtil.delete("SMSVerify:" + number);
+        redisUtil.delete(VerificationKeyManager.failSmsKey(number));
     }
 
     private String createCertificationCode() {
