@@ -1,5 +1,7 @@
 package back.vybz.auth_busker.busker.application;
 
+import back.vybz.auth_busker.busker.dto.SendPurpose;
+import back.vybz.auth_busker.busker.util.VerificationValidator;
 import back.vybz.auth_busker.common.application.TokenService;
 import back.vybz.auth_busker.common.entity.BaseResponseStatus;
 import back.vybz.auth_busker.common.exception.BaseException;
@@ -12,6 +14,8 @@ import back.vybz.auth_busker.busker.dto.request.RequestAuthSignInDto;
 import back.vybz.auth_busker.busker.dto.request.RequestSignUpDto;
 import back.vybz.auth_busker.busker.dto.response.ResponseBuskerSignInDto;
 import back.vybz.auth_busker.busker.infrastructure.AuthRepository;
+import back.vybz.auth_busker.kafka.event.BuskerAuthEvent;
+import back.vybz.auth_busker.kafka.producer.BuskerKafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,6 +36,8 @@ public class AuthServiceImpl implements AuthService {
     private final TokenService tokenService;
 
     private final JwtProvider jwtProvider;
+
+    private final VerificationValidator verificationValidator;
 
     private final BuskerKafkaProducer buskerKafkaProducer;
 
