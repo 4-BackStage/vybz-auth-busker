@@ -2,6 +2,7 @@ package back.vybz.auth_busker.busker.dto.request;
 
 import back.vybz.auth_busker.busker.domain.Busker;
 import back.vybz.auth_busker.busker.domain.Status;
+import back.vybz.auth_busker.busker.vo.request.RequestAgreementConsentVo;
 import back.vybz.auth_busker.busker.vo.request.RequestSignUpVo;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,13 +26,17 @@ public class RequestSignUpDto {
 
     private String nickname;
 
+    private List<RequestAgreementConsentDto> agreements;
+
     @Builder
-    public RequestSignUpDto(String email, String password, List<String> categoryId, String phoneNumber, String nickname) {
+    public RequestSignUpDto(String email, String password, List<String> categoryId, String phoneNumber,
+                            String nickname, List<RequestAgreementConsentDto> agreements) {
         this.email = email;
         this.password = password;
         this.categoryId = categoryId;
         this.phoneNumber = phoneNumber;
         this.nickname = nickname;
+        this.agreements = agreements;
     }
 
     public Busker toEntity(PasswordEncoder passwordEncoder) {
@@ -51,6 +56,18 @@ public class RequestSignUpDto {
                 .phoneNumber(requestSignUpVo.getPhoneNumber())
                 .nickname(requestSignUpVo.getNickname())
                 .categoryId(requestSignUpVo.getCategoryId())
+                .agreements(mapAgreements(requestSignUpVo.getAgreements()))
                 .build();
     }
+
+    private static List<RequestAgreementConsentDto> mapAgreements(List<RequestAgreementConsentVo> requestAgreements) {
+        if (requestAgreements == null || requestAgreements.isEmpty()) return List.of();
+        return requestAgreements.stream()
+                .map(vo -> RequestAgreementConsentDto.builder()
+                        .agreementId(vo.getAgreementId())
+                        .agreed(vo.getAgreed())
+                        .build())
+                .toList();
+    }
+
 }

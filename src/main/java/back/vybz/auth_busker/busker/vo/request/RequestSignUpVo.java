@@ -43,4 +43,6 @@ public class RequestSignUpVo {
             message = "닉네임은 1자 이상 20자 이하로 입력해주세요"
     )
     private String nickname;
+
+    private List<RequestAgreementConsentVo> agreements;
 }

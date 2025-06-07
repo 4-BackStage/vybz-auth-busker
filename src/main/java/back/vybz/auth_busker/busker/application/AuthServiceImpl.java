@@ -74,6 +74,7 @@ public class AuthServiceImpl implements AuthService {
                 .buskerUuid(savedBusker.getBuskerUuid())
                 .nickname(requestSignUpDto.getNickname())
                 .categoryId(requestSignUpDto.getCategoryId())
+                .agreements(requestSignUpDto.getAgreements())
                 .build());
     }
 
