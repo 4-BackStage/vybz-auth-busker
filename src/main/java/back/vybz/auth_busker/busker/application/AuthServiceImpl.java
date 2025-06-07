@@ -1,7 +1,5 @@
 package back.vybz.auth_busker.busker.application;
 
-import back.vybz.auth_busker.busker.dto.SendPurpose;
-import back.vybz.auth_busker.busker.util.VerificationValidator;
 import back.vybz.auth_busker.common.application.TokenService;
 import back.vybz.auth_busker.common.entity.BaseResponseStatus;
 import back.vybz.auth_busker.common.exception.BaseException;
@@ -35,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final JwtProvider jwtProvider;
 
-    private final VerificationValidator verificationValidator;
+    private final BuskerKafkaProducer buskerKafkaProducer;
 
     @Override
     public UserDetails loadBuskerByUuid(String buskerUuid) {
@@ -61,10 +59,16 @@ public class AuthServiceImpl implements AuthService {
 
         verificationValidator.validate(SendPurpose.SIGN_UP, email, phone);
 
-        authRepository.save(requestSignUpDto.toEntity(passwordEncoder));
+        Busker savedBusker = authRepository.save(requestSignUpDto.toEntity(passwordEncoder));
 
         redisUtil.delete("sign-up-Verified:" + email);
         redisUtil.delete("sign-up-sms-Verified:" + phone);
+
+        buskerKafkaProducer.sendBuskerAuthEvent(BuskerAuthEvent.builder()
+                .buskerUuid(savedBusker.getBuskerUuid())
+                .nickname(requestSignUpDto.getNickname())
+                .categoryId(requestSignUpDto.getCategoryId())
+                .build());
     }
 
     @Override

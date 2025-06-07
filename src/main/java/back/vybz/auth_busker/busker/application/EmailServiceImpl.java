@@ -46,8 +46,8 @@ public class EmailServiceImpl implements EmailService {
             throw new BaseException(BaseResponseStatus.EMAIL_CODE_SEND_LIMITED);
         }
 
-        redisUtil.save(email, code, 5L, TimeUnit.MINUTES);
-        redisUtil.save(limitKey, "3", 3L, TimeUnit.MINUTES);
+        redisUtil.save(email, code, 1L, TimeUnit.MINUTES);
+        redisUtil.save(limitKey, "3", 1L, TimeUnit.MINUTES);
 
         if (requestSendEmailCodeDto.getPurpose() == SendPurpose.FIND_PASSWORD) {
             emailSender.send(email, "VYBZ 이메일 인증", emailTemplateBuilder.buildVerificationEmail("이메일 인증을", code));

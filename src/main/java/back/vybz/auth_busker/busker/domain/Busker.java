@@ -37,7 +37,7 @@ public class Busker extends SoftDeletableEntity {
     /**
      * 패스워드
      */
-    @Column(name = "password", nullable = false, length = 20)
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
 
     /**

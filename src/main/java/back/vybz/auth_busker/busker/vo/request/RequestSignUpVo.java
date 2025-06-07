@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 public class RequestSignUpVo {
@@ -26,7 +28,7 @@ public class RequestSignUpVo {
     private String password;
 
     @NotBlank(message = "카테고리를 선택해주세요.")
-    private String categoryId;
+    private List<String> categoryId;
 
     @NotBlank
     @Pattern(

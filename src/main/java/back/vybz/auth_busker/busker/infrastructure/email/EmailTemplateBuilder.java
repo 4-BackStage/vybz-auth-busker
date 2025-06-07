@@ -10,7 +10,7 @@ public class EmailTemplateBuilder {
                 <body style="margin:0; padding:40px; background-color:rgba(255,255,255); font-family:'Helvetica Neue', Arial, sans-serif;">
                     <div style="max-width:600px; margin:auto; background-color:#1F2937; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.3); text-align:center;">
                         <div style="background-color:#38BDF8; padding:24px;">
-                           <img src="https://www.vybz.kr/common/img/common/logo.png" alt="VYBZ Logo" style="height:40px;">
+                           <img src="https://vybz.s3.ap-northeast-2.amazonaws.com/vybz_logo.png" alt="VYBZ Logo" style="height:40px;"/>
                         </div>
                         <div style="padding:32px 24px;">
                             <h2 style="color:#38BDF8; margin-bottom:16px;">VYBZ 이메일 인증</h2>
