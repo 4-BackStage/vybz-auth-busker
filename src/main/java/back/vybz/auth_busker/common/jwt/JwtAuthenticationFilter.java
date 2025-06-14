@@ -46,9 +46,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String jwt = authHeader.substring(7);
 
         try {
-            if (!jwtProvider.isValidToken(jwt)) {
-                throw new BaseException(BaseResponseStatus.EXPIRED_OR_INVALID_TOKEN);
-            }
+
+            jwtProvider.validateToken(jwt);
 
             String tokenType = jwtProvider.extractTokenType(jwt);
             String buskerUuid = jwtProvider.extractClaim(jwt, claims -> claims.get("busker_uuid", String.class));
