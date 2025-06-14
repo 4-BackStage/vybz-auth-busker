@@ -13,7 +13,7 @@ public class BuskerAuthEvent {
 
     private String buskerUuid;
 
-    private List<String> categoryId;
+    private List<Long> categoryId;
 
     private String nickname;
 
@@ -24,7 +24,7 @@ public class BuskerAuthEvent {
     private String introduction;
 
     @Builder
-    public BuskerAuthEvent(String buskerUuid, List<String> categoryId, String nickname,
+    public BuskerAuthEvent(String buskerUuid, List<Long> categoryId, String nickname,
                            List<RequestAgreementConsentDto> agreements, String profileImageUrl, String introduction) {
         this.buskerUuid = buskerUuid;
         this.categoryId = categoryId;

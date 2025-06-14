@@ -42,9 +42,7 @@ public class ReissueService {
 
         String refreshToken = authorization.replace("Bearer ", "");
 
-        if (!jwtProvider.isValidToken(refreshToken)) {
-            throw new BaseException(BaseResponseStatus.INVALID_REFRESH_TOKEN);
-        }
+        jwtProvider.validateToken(refreshToken);
 
         return refreshToken;
     }

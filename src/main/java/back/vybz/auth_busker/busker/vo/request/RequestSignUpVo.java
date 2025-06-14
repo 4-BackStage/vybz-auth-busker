@@ -28,7 +28,7 @@ public class RequestSignUpVo {
     private String password;
 
     @NotBlank(message = "카테고리를 선택해주세요.")
-    private List<String> categoryId;
+    private List<Long> categoryId;
 
     @NotBlank
     @Pattern(

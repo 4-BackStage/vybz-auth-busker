@@ -107,6 +107,6 @@ public class AuthServiceImpl implements AuthService {
 
         String uuid = jwtProvider.extractSubject(refreshToken);
 
-        redisUtil.delete("Refresh:" + uuid);
+        redisUtil.delete("Refresh_busker:" + uuid);
     }
 }
