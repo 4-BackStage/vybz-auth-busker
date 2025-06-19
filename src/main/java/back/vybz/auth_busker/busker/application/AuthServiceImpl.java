@@ -15,7 +15,9 @@ import back.vybz.auth_busker.busker.dto.request.RequestSignUpDto;
 import back.vybz.auth_busker.busker.dto.response.ResponseBuskerSignInDto;
 import back.vybz.auth_busker.busker.infrastructure.AuthRepository;
 import back.vybz.auth_busker.kafka.event.BuskerAuthEvent;
+import back.vybz.auth_busker.kafka.event.BuskerSearchEvent;
 import back.vybz.auth_busker.kafka.producer.BuskerKafkaProducer;
+import back.vybz.auth_busker.kafka.producer.BuskerSearchKafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,6 +42,8 @@ public class AuthServiceImpl implements AuthService {
     private final VerificationValidator verificationValidator;
 
     private final BuskerKafkaProducer buskerKafkaProducer;
+
+    private final BuskerSearchKafkaProducer buskerSearchKafkaProducer;
 
     @Override
     public UserDetails loadBuskerByUuid(String buskerUuid) {
@@ -77,6 +81,12 @@ public class AuthServiceImpl implements AuthService {
                 .agreements(requestSignUpDto.getAgreements())
                 .profileImageUrl(requestSignUpDto.getProfileImageUrl())
                 .introduction(requestSignUpDto.getIntroduction())
+                .build());
+
+        buskerSearchKafkaProducer.send(BuskerSearchEvent.builder()
+                .buskerUuid(savedBusker.getBuskerUuid())
+                .nickname(requestSignUpDto.getNickname())
+                .profileImageUrl(requestSignUpDto.getProfileImageUrl())
                 .build());
     }
 
