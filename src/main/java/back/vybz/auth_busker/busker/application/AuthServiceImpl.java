@@ -6,6 +6,7 @@ import back.vybz.auth_busker.common.application.TokenService;
 import back.vybz.auth_busker.common.entity.BaseResponseStatus;
 import back.vybz.auth_busker.common.exception.BaseException;
 import back.vybz.auth_busker.common.jwt.JwtProvider;
+import back.vybz.auth_busker.common.util.ChosungUtils;
 import back.vybz.auth_busker.common.util.RedisUtil;
 import back.vybz.auth_busker.busker.domain.Busker;
 import back.vybz.auth_busker.busker.domain.CustomBuskerDetails;
@@ -67,7 +68,7 @@ public class AuthServiceImpl implements AuthService {
             throw new BaseException(BaseResponseStatus.DUPLICATED_SMS);
         }
 
-        verificationValidator.validate(SendPurpose.SIGN_UP, email, phone);
+      //  verificationValidator.validate(SendPurpose.SIGN_UP, email, phone);
 
         Busker savedBusker = authRepository.save(requestSignUpDto.toEntity(passwordEncoder));
 
@@ -86,6 +87,7 @@ public class AuthServiceImpl implements AuthService {
         buskerSearchKafkaProducer.send(BuskerSearchEvent.builder()
                 .buskerUuid(savedBusker.getBuskerUuid())
                 .nickname(requestSignUpDto.getNickname())
+                .nicknameChosung(ChosungUtils.toChosung(requestSignUpDto.getNickname()))
                 .profileImageUrl(requestSignUpDto.getProfileImageUrl())
                 .build());
     }
