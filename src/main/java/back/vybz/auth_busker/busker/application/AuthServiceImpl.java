@@ -6,6 +6,7 @@ import back.vybz.auth_busker.common.application.TokenService;
 import back.vybz.auth_busker.common.entity.BaseResponseStatus;
 import back.vybz.auth_busker.common.exception.BaseException;
 import back.vybz.auth_busker.common.jwt.JwtProvider;
+import back.vybz.auth_busker.common.util.ChosungUtils;
 import back.vybz.auth_busker.common.util.RedisUtil;
 import back.vybz.auth_busker.busker.domain.Busker;
 import back.vybz.auth_busker.busker.domain.CustomBuskerDetails;
@@ -15,7 +16,9 @@ import back.vybz.auth_busker.busker.dto.request.RequestSignUpDto;
 import back.vybz.auth_busker.busker.dto.response.ResponseBuskerSignInDto;
 import back.vybz.auth_busker.busker.infrastructure.AuthRepository;
 import back.vybz.auth_busker.kafka.event.BuskerAuthEvent;
+import back.vybz.auth_busker.kafka.event.BuskerSearchEvent;
 import back.vybz.auth_busker.kafka.producer.BuskerKafkaProducer;
+import back.vybz.auth_busker.kafka.producer.BuskerSearchKafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -41,6 +44,8 @@ public class AuthServiceImpl implements AuthService {
 
     private final BuskerKafkaProducer buskerKafkaProducer;
 
+    private final BuskerSearchKafkaProducer buskerSearchKafkaProducer;
+
     @Override
     public UserDetails loadBuskerByUuid(String buskerUuid) {
         return authRepository.findByBuskerUuid(buskerUuid)
@@ -63,7 +68,7 @@ public class AuthServiceImpl implements AuthService {
             throw new BaseException(BaseResponseStatus.DUPLICATED_SMS);
         }
 
-        verificationValidator.validate(SendPurpose.SIGN_UP, email, phone);
+      //  verificationValidator.validate(SendPurpose.SIGN_UP, email, phone);
 
         Busker savedBusker = authRepository.save(requestSignUpDto.toEntity(passwordEncoder));
 
@@ -77,6 +82,13 @@ public class AuthServiceImpl implements AuthService {
                 .agreements(requestSignUpDto.getAgreements())
                 .profileImageUrl(requestSignUpDto.getProfileImageUrl())
                 .introduction(requestSignUpDto.getIntroduction())
+                .build());
+
+        buskerSearchKafkaProducer.send(BuskerSearchEvent.builder()
+                .buskerUuid(savedBusker.getBuskerUuid())
+                .nickname(requestSignUpDto.getNickname())
+                .nicknameChosung(ChosungUtils.toChosung(requestSignUpDto.getNickname()))
+                .profileImageUrl(requestSignUpDto.getProfileImageUrl())
                 .build());
     }
 
