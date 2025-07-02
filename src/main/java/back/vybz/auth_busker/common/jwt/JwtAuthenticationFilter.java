@@ -80,16 +80,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
-
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) {
-        String uri = request.getRequestURI();
-        return uri.equals("/api/v1/busker/reissue") ||
-                uri.equals("/api/v1/busker/sign-in") ||
-                uri.equals("/api/v1/busker/sign-out") ||
-                uri.startsWith("/v3/api-docs") ||
-                uri.startsWith("/swagger-ui") ||
-                uri.startsWith("/webjars") ||
-                uri.startsWith("/error");
-    }
 }

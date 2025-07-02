@@ -21,7 +21,7 @@ public class BuskerSearchKafkaProducer {
         log.info("[Kafka] sending BuskerSearchEvent to topic '{}': {}", TOPIC_NAME, event);
 
         CompletableFuture<SendResult<String, BuskerSearchEvent>> future =
-                kafkaTemplate.send(TOPIC_NAME, event.getBuskerUuid(), event);  // ← key 추가!
+                kafkaTemplate.send(TOPIC_NAME, event.getBuskerUuid(), event);
 
         future.whenComplete((result, ex) -> {
             if (ex != null) {

@@ -1,6 +1,7 @@
 package back.vybz.auth_busker.kafka.config;
 
 import back.vybz.auth_busker.kafka.event.BuskerSearchEvent;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,5 +38,10 @@ public class BuskerSearchKafkaConfig {
     @Bean
     public KafkaTemplate<String, BuskerSearchEvent> buskerSearchKafkaTemplate() {
         return new KafkaTemplate<>(createBuskerSearchNotification());
+    }
+
+    @Bean
+    public NewTopic buskerSearchTopic() {
+        return new NewTopic("create-busker-search", 1, (short) 3);
     }
 }

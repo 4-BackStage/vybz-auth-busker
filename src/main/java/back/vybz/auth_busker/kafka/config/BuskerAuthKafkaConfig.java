@@ -1,6 +1,7 @@
 package back.vybz.auth_busker.kafka.config;
 
 import back.vybz.auth_busker.kafka.event.BuskerAuthEvent;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,5 +38,10 @@ public class BuskerAuthKafkaConfig {
     @Bean
     public KafkaTemplate<String, BuskerAuthEvent> kafkaTemplate() {
         return new KafkaTemplate<>(createBuskerAuthNotification());
+    }
+
+    @Bean
+    public NewTopic buskerAuthTopic() {
+        return new NewTopic("create-busker-auth", 1, (short) 3);
     }
 }
